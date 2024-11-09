@@ -1,0 +1,30 @@
+[2024-11-09T19:46:00.342+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-11-09T19:46:00.372+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: download_rocket_launches.notify manual__2024-11-09T19:45:22.287683+00:00 [queued]>
+[2024-11-09T19:46:00.388+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: download_rocket_launches.notify manual__2024-11-09T19:45:22.287683+00:00 [queued]>
+[2024-11-09T19:46:00.388+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2024-11-09T19:46:00.423+0000] {taskinstance.py:2889} INFO - Executing <Task(BashOperator): notify> on 2024-11-09 19:45:22.287683+00:00
+[2024-11-09T19:46:00.429+0000] {standard_task_runner.py:72} INFO - Started process 4605 to run task
+[2024-11-09T19:46:00.436+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'download_rocket_launches', 'notify', 'manual__2024-11-09T19:45:22.287683+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/rocket_launch.py', '--cfg-path', '/tmp/tmp0belne4x']
+[2024-11-09T19:46:00.438+0000] {standard_task_runner.py:105} INFO - Job 5: Subtask notify
+[2024-11-09T19:46:00.517+0000] {task_command.py:467} INFO - Running <TaskInstance: download_rocket_launches.notify manual__2024-11-09T19:45:22.287683+00:00 [running]> on host DESKTOP-G901N6S.
+[2024-11-09T19:46:00.678+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='download_rocket_launches' AIRFLOW_CTX_TASK_ID='notify' AIRFLOW_CTX_EXECUTION_DATE='2024-11-09T19:45:22.287683+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-09T19:45:22.287683+00:00'
+[2024-11-09T19:46:00.681+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-11-09T19:46:00.682+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-11-09T19:46:00.683+0000] {logging_mixin.py:190} INFO - Current task name:notify state:running start_date:2024-11-09 19:46:00.372971+00:00
+[2024-11-09T19:46:00.683+0000] {logging_mixin.py:190} INFO - Dag name:download_rocket_launches and current dag run status:running
+[2024-11-09T19:46:00.683+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-11-09T19:46:00.684+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
+[2024-11-09T19:46:00.685+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'echo "There are now $(ls /appfiles/tmp/images/ | wc -l) images."']
+[2024-11-09T19:46:00.703+0000] {subprocess.py:99} INFO - Output:
+[2024-11-09T19:46:00.717+0000] {subprocess.py:106} INFO - ls: cannot access '/appfiles/tmp/images/': No such file or directory
+[2024-11-09T19:46:00.721+0000] {subprocess.py:106} INFO - There are now 0 images.
+[2024-11-09T19:46:00.722+0000] {subprocess.py:110} INFO - Command exited with return code 0
+[2024-11-09T19:46:00.784+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-11-09T19:46:00.785+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=download_rocket_launches, task_id=notify, run_id=manual__2024-11-09T19:45:22.287683+00:00, execution_date=20241109T194522, start_date=20241109T194600, end_date=20241109T194600
+[2024-11-09T19:46:00.814+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2024-11-09T19:46:00.814+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2024-11-09T19:46:00.815+0000] {logging_mixin.py:190} INFO - Dag name:download_rocket_launches queued_at:2024-11-09 19:45:22.370405+00:00
+[2024-11-09T19:46:00.815+0000] {logging_mixin.py:190} INFO - Task hostname:DESKTOP-G901N6S. operator:BashOperator
+[2024-11-09T19:46:00.853+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-11-09T19:46:00.873+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-11-09T19:46:00.874+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
