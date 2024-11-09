@@ -230,3 +230,10 @@
 [2024-11-09T20:27:26.181+0000] {logging_mixin.py:190} INFO - [2024-11-09T20:27:26.181+0000] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-11-09T20:27:26.325+0000] {logging_mixin.py:190} INFO - [2024-11-09T20:27:26.324+0000] {dag.py:4180} INFO - Setting next_dagrun for example_weekday_branch_operator to 2024-11-08 00:00:00+00:00, run_after=2024-11-09 00:00:00+00:00
 [2024-11-09T20:27:26.422+0000] {processor.py:208} INFO - Processing /home/chirag/airflow/lib/python3.12/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py took 0.427 seconds
+[2024-11-09T20:29:01.998+0000] {processor.py:186} INFO - Started process (PID=14739) to work on /home/chirag/airflow/lib/python3.12/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py
+[2024-11-09T20:29:02.001+0000] {processor.py:914} INFO - Processing file /home/chirag/airflow/lib/python3.12/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py for tasks to queue
+[2024-11-09T20:29:02.006+0000] {logging_mixin.py:190} INFO - [2024-11-09T20:29:02.005+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/chirag/airflow/lib/python3.12/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py
+[2024-11-09T20:29:02.038+0000] {processor.py:925} INFO - DAG(s) 'example_weekday_branch_operator' retrieved from /home/chirag/airflow/lib/python3.12/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py
+[2024-11-09T20:29:02.066+0000] {logging_mixin.py:190} INFO - [2024-11-09T20:29:02.065+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-09T20:29:02.284+0000] {logging_mixin.py:190} INFO - [2024-11-09T20:29:02.284+0000] {dag.py:4180} INFO - Setting next_dagrun for example_weekday_branch_operator to 2024-11-08 00:00:00+00:00, run_after=2024-11-09 00:00:00+00:00
+[2024-11-09T20:29:02.338+0000] {processor.py:208} INFO - Processing /home/chirag/airflow/lib/python3.12/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py took 0.367 seconds

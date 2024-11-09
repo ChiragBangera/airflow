@@ -5487,3 +5487,4 @@ File Path                                                                       
 /home/chirag/airflow/lib/python3.12/site-packages/airflow/example_dags/subdags/subdag.py                                                                    0           0  0.10s           2024-11-09T20:28:11                       3
 /home/chirag/airflow/lib/python3.12/site-packages/airflow/example_dags/plugins/decreasing_priority_weight_strategy.py                                       0           0  0.10s           2024-11-09T20:28:09                       3
 ================================================================================
+[2024-11-09T20:29:08.108+0000] {manager.py:465} INFO - Exiting gracefully upon receiving signal 15
