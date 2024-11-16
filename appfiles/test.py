@@ -4,12 +4,14 @@ import pandas as pd
 from pathlib import Path
 import datetime as dt
 from opensky_api import OpenSkyApi
+from zoneinfo import ZoneInfo
+
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
 
-def get_city_bike_data(city_name: str = "chartered-bike-prayagraj"):
+def _get_city_bike_data(city_name: str = "chartered-bike-prayagraj"):
     url = f"https://api.citybik.es/v2/networks/{city_name}"
     try:
         res = requests.get(url)
@@ -26,7 +28,44 @@ def get_city_bike_data(city_name: str = "chartered-bike-prayagraj"):
         print(e)
         return e
 
-    return json_result
+    dump_folder = Path(f"/home/chirag/airflow/appfiles/tmp/{city_name}")
+
+    preprocess_status_log_file = Path(
+        "/home/chirag/airflow/appfiles/tmp/pre_process_status.json"
+    )
+
+    if not dump_folder.is_dir():
+        dump_folder.mkdir(parents=True, exist_ok=True)
+
+    file_name = (
+        f"events_{dt.datetime.now().astimezone(ZoneInfo("Asia/Kolkata")).date()}.json"
+    )
+    dump_file_loc = dump_folder / file_name
+
+    if not dump_file_loc.is_file():
+        with open(dump_file_loc, "w") as file:
+            json.dump(json_result, file, indent=4)
+
+        log_identifier = str(f"{city_name}_{file_name}")
+
+        try:
+            with open(preprocess_status_log_file, "r") as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            data = {}
+
+        data[log_identifier] = {
+            "pre_process_status": False,
+            "file_loc": str(dump_file_loc),
+            "dump_timestamp": str(
+                dt.datetime.now().astimezone(ZoneInfo("Asia/Kolkata"))
+            ),
+            "city_name": str(city_name),
+            "file_name": str(file_name),
+        }
+
+        with open(preprocess_status_log_file, "w") as file:
+            json.dump(data, file, indent=4)
 
 
 def parse_json_bike_data(json_data):
@@ -35,59 +74,5 @@ def parse_json_bike_data(json_data):
     print(len(stations))
 
 
-res = parse_json_bike_data(get_city_bike_data())
-
-# res = requests.get("https://api.citybik.es/v2/networks/chartered-bike-prayagr")
-# try:
-#     json_result = res.json()
-# except requests.exceptions.JSONDecodeError as e:
-#     print(e)
-
-
-# rocket launch
-# def _get_launch_data():
-#     url = "https://ll.thespacedevs.com/2.0.0/launch/upcoming"
-#     tmp = Path("appfiles/tmp/launches.json")
-#     data = {}
-#     if not tmp.is_file():
-#         try:
-#             res = requests.get(url)
-#             res.raise_for_status()
-#             data = res.json()
-#         except requests.exceptions.RequestException as e:
-#             print(e)
-#         Path("appfiles/tmp").mkdir(parents=True, exist_ok=True)
-#         with open(tmp, "w") as json_file:
-#             json.dump(data, json_file, indent=4)
-
-
-# def _get_pictures():
-#     tmp = Path("appfiles/tmp/images")
-#     if not tmp.is_dir():
-#         tmp.mkdir(parents=True, exist_ok=True)
-
-#         # Download all pictures in the launches.json
-#         with open("appfiles/tmp/launches.json") as f:
-#             launches = json.load(f)
-#             image_urls = [launch["image"] for launch in launches["results"]]
-#         for image in image_urls:
-#             image_name = image.split("/")[-1]
-#             target_path = tmp / image_name
-#             try:
-#                 res = requests.get(image)
-#                 with open(target_path, "wb") as f:
-#                     f.write(res.content)
-#             except requests.exceptions.MissingSchema:
-#                 print(f"{image} is not valid url")
-#             except requests.exceptions.ConnectionError:
-#                 print(f"Could not connect for {image}")
-
-
-# data = _get_launch_data()
-# _get_pictures()
-
-# api = OpenSkyApi()
-
-# departures = api.get_departures_by_airport("VOBL", 1731349800, 1731436200)
-# for drparture in departures:
-#     print(drparture, "\n--------,")
+res = _get_city_bike_data()
+print(dt.date.today())
